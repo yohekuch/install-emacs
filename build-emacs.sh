@@ -10,20 +10,25 @@ set -eu
 readonly version="24.5"
 
 # install dependencies
+printf "Installing dependencies... "
 sudo apt-get -qq update
 sudo apt-get -qq install -y stow build-essential libx11-dev xaw3dg-dev \
      libjpeg-dev libpng12-dev libgif-dev libtiff5-dev libncurses5-dev \
      libxft-dev librsvg2-dev libmagickcore-dev libmagick++-dev \
      libxml2-dev libgpm-dev libotf-dev libm17n-dev \
      libgnutls-dev wget
+printf "done.\n"
 
 # download source package
 if [[ ! -d emacs-"$version" ]]; then
+   printf "Downloading GNU Emacs... "
    wget http://ftp.gnu.org/gnu/emacs/emacs-"$version".tar.xz
    tar xvf emacs-"$version".tar.xz
+   printf "done.\n"
 fi
 
 # build and install
+echo "Building and installing GNU Emacs... "
 sudo mkdir -p /usr/local/stow
 cd emacs-"$version"
 ./configure \
@@ -38,3 +43,5 @@ sudo make \
 
 cd /usr/local/stow
 sudo stow emacs-"$version"
+
+echo "All done."
