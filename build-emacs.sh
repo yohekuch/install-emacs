@@ -3,7 +3,7 @@
 # Build latest version of Emacs, version management with stow
 # OS: Ubuntu 14.04 LTS and newer
 # version: 24.5
-# Toolkit: lucid
+# Toolkit: default - gtk-3
 
 set -eu
 
@@ -11,8 +11,8 @@ readonly version="24.5"
 
 # install dependencies
 printf "Installing dependencies... "
-sudo apt-get -qq update
-sudo apt-get -qq install -y stow build-essential libx11-dev xaw3dg-dev \
+sudo apt-get update
+sudo apt-get install -y stow build-essential libx11-dev xaw3dg-dev \
      libjpeg-dev libpng12-dev libgif-dev libtiff5-dev libncurses5-dev \
      libxft-dev librsvg2-dev libmagickcore-dev libmagick++-dev \
      libxml2-dev libgpm-dev libotf-dev libm17n-dev \
@@ -31,15 +31,10 @@ fi
 echo "Building and installing GNU Emacs... "
 sudo mkdir -p /usr/local/stow
 cd emacs-"$version"
-./configure \
-    --with-xft \
-    --with-x-toolkit=lucid
 
+./configure
 make
-sudo make \
-    install-arch-dep \
-    install-arch-indep \
-    prefix=/usr/local/stow/emacs-"$version"
+sudo make install prefix=/usr/local/stow/emacs-"$version"
 
 cd /usr/local/stow
 sudo stow emacs-"$version"
