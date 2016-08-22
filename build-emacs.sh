@@ -11,6 +11,7 @@ readonly version="24.5"
 
 if emacs --version | head -n 1 | grep -iE "GNU Emacs $version" ; then
     echo Emacs "$version" is already installed.
+    exit
 fi
 
 # install dependencies
