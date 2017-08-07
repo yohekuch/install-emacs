@@ -11,7 +11,7 @@ readonly version="24.5"
 
 if emacs --version | head -n 1 | grep -iE "GNU Emacs $version" ; then
     echo Emacs "$version" is already installed.
-    exit
+    exit 0
 fi
 
 # install dependencies
@@ -26,6 +26,7 @@ sudo apt-get install -y stow build-essential libx11-dev xaw3dg-dev \
 printf "done.\n"
 
 # download source package
+cd ~/Downloads
 if [[ ! -d emacs-"$version" ]]; then
    printf "Downloading GNU Emacs... "
    wget http://ftp.gnu.org/gnu/emacs/emacs-"$version".tar.xz
