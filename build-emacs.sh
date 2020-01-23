@@ -2,12 +2,12 @@
 
 # Build latest version of Emacs, version management with stow
 # OS: Ubuntu 14.04 LTS and newer
-# version: 25.2
+# version: 26.3
 # Toolkit: default - gtk-3
 
 set -eu
 
-readonly version="25.3"
+readonly version="26.3"
 
 if emacs --version | head -n 1 | grep -iE "GNU Emacs $version" ; then
     echo Emacs "$version" is already installed.
