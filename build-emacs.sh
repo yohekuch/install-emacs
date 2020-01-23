@@ -9,11 +9,6 @@ set -eu
 
 readonly version="26.3"
 
-if emacs --version | head -n 1 | grep -iE "GNU Emacs $version" ; then
-    echo Emacs "$version" is already installed.
-    exit 0
-fi
-
 # install dependencies
 printf "Installing dependencies... "
 sudo apt-get update
